@@ -13,7 +13,7 @@ if [[ -f ~/.config/zsh/completions.zsh ]]; then
 else
     # 基础补全配置（fallback）
     autoload -Uz compinit
-    compinit
+    compinit -u
     
     # 基本补全样式
     zstyle ':completion:*' menu select
@@ -63,11 +63,10 @@ if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
     ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 fi
 
-# 启用额外的 zsh-completions
+# 启用额外的 zsh-completions（但不重复初始化 compinit）
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-    autoload -Uz compinit
-    compinit
+    # 注意：不再重复调用 compinit，因为已经在上面或 completions.zsh 中调用过了
 fi
 
 # 现代CLI工具别名（渐进增强）
