@@ -1,0 +1,74 @@
+# 核心配置
+eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
+eval "$(mise activate zsh)"
+
+# 现代CLI工具别名（渐进增强）
+command -v rg >/dev/null && alias grep='rg' || alias grep='grep --color=auto'
+command -v fd >/dev/null && alias find='fd'
+command -v bat >/dev/null && alias cat='bat --style=plain'
+command -v eza >/dev/null && alias ls='eza --icons' || alias ls='ls --color=auto'
+command -v dust >/dev/null && alias du='dust'
+command -v btm >/dev/null && alias top='btm'
+command -v procs >/dev/null && alias ps='procs'
+
+# 编辑器智能切换
+alias trae='open -a Trae'
+function code() {
+    if [[ "$1" == "--ai" ]]; then
+        trae "${2:-.}"
+    else
+        zed "${1:-.}"
+    fi
+}
+
+# 容器和K8s别名
+alias d='docker'
+alias dc='docker-compose'
+alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
+alias k='kubectl'
+alias kgp='kubectl get pods'
+alias kgs='kubectl get svc'
+alias kgd='kubectl get deployment'
+alias kge='kubectl get events --sort-by=.metadata.creationTimestamp'
+
+# Git工作流别名
+alias gs='git status'
+alias gl='git log --oneline --graph'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gpl='git pull'
+alias gco='git checkout'
+
+# 数据库别名
+alias mysql='mysql -u root -p'
+alias redis-cli='redis-cli'
+if command -v clickhouse-client >/dev/null; then
+    alias ch='clickhouse-client'
+elif [ -d "/Applications/ClickHouse.app" ]; then
+    alias ch='open -a ClickHouse'
+    alias clickhouse='open -a ClickHouse'
+fi
+
+# AI工具别名
+alias ai='aichat'
+alias chat='ollama run phi3:mini'
+alias code-review='aichat "请帮我审查这段代码"'
+
+# 系统监控别名
+alias monitor='btm'
+alias usage='dust'
+alias processes='procs'
+
+# 环境变量
+export EDITOR="zed"
+export VISUAL="zed"
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
+
+# 历史记录优化
+HISTSIZE=10000
+SAVHIST=10000
+setopt HIST_IGNORE_DUPS
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY

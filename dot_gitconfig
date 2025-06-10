@@ -1,0 +1,38 @@
+[user]
+	# 请在安装后设置您的信息
+	# name = Your Name
+	# email = your.email@example.com
+
+[init]
+	defaultBranch = main
+
+[push]
+	default = current
+
+[pull]
+	rebase = true
+
+[core]
+	editor = zed --wait
+	autocrlf = input
+
+[alias]
+	s = status
+	l = log --oneline --graph
+	a = add
+	c = commit
+	p = push
+	pl = pull
+	co = checkout
+	b = branch
+	sw = switch
+	restore = restore
+
+[color]
+	ui = auto
+
+[diff]
+	colorMoved = default
+
+[merge]
+	conflictstyle = diff3
