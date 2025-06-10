@@ -16,10 +16,9 @@
 # 基础补全系统初始化
 autoload -Uz compinit
 
-# 完全跳过安全检查以避免权限警告
-# 使用 -u 参数跳过不安全目录检查
+# 使用 -i 参数进行不安全目录检查，但在发现问题时不中止
 # 使用 -C 参数跳过缓存检查以加快启动速度
-compinit -u -C
+compinit -i -C
 
 # 加载补全系统的其他模块
 autoload -Uz bashcompinit && bashcompinit
