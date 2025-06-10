@@ -13,6 +13,9 @@ else
     compinit -C
 fi
 
+# 加载必要的模块
+zmodload zsh/complist
+
 # ============================================================================
 # 补全样式和行为配置
 # ============================================================================
@@ -89,9 +92,6 @@ zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directori
 # Kubernetes (kubectl) 补全
 if command -v kubectl >/dev/null 2>&1; then
     source <(kubectl completion zsh)
-    # 为别名启用补全
-    complete -F __start_kubectl k
-    compdef __start_kubectl k
 fi
 
 # Docker 补全
@@ -121,11 +121,13 @@ fi
 
 # Terraform 补全
 if command -v terraform >/dev/null 2>&1; then
-    complete -C terraform terraform
+    autoload -U +X bashcompinit && bashcompinit
+    complete -o nospace -C terraform terraform
 fi
 
 # AWS CLI 补全
 if command -v aws >/dev/null 2>&1; then
+    autoload -U +X bashcompinit && bashcompinit
     complete -C aws_completer aws
 fi
 
@@ -154,34 +156,34 @@ compdef _editor_files vim
 compdef _editor_files nvim
 
 # Git 别名补全映射
-compdef gs=git-status
-compdef gl=git-log
-compdef ga=git-add
-compdef gc=git-commit
-compdef gp=git-push
-compdef gpl=git-pull
-compdef gco=git-checkout
-compdef gb=git-branch
-compdef gd=git-diff
-compdef gst=git-stash
+compdef gs=git
+compdef gl=git
+compdef ga=git
+compdef gc=git
+compdef gp=git
+compdef gpl=git
+compdef gco=git
+compdef gb=git
+compdef gd=git
+compdef gst=git
 
 # Kubernetes 别名补全映射
 compdef k=kubectl
-compdef kgp='kubectl get pods'
-compdef kgs='kubectl get svc'
-compdef kgd='kubectl get deployment'
-compdef kge='kubectl get events'
-compdef kdp='kubectl describe pod'
-compdef kds='kubectl describe svc'
-compdef kdd='kubectl describe deployment'
+compdef kgp=kubectl
+compdef kgs=kubectl
+compdef kgd=kubectl
+compdef kge=kubectl
+compdef kdp=kubectl
+compdef kds=kubectl
+compdef kdd=kubectl
 
 # Docker 别名补全映射
 compdef d=docker
 compdef dc=docker-compose
-compdef dps='docker ps'
-compdef di='docker images'
-compdef drm='docker rm'
-compdef drmi='docker rmi'
+compdef dps=docker
+compdef di=docker
+compdef drm=docker
+compdef drmi=docker
 
 # ============================================================================
 # 补全行为选项
