@@ -7,23 +7,24 @@ brew "starship"
 brew "tmux"
 
 # 现代CLI工具
-brew "ripgrep"
-brew "fd"
-brew "bat"
-brew "eza"
-brew "dust"
-brew "procs"
-brew "htop"
-brew "tig"
-tap "clementtsang/bottom"
-brew "clementtsang/bottom/bottom"
+brew "ripgrep"              # 极速搜索，替代grep
+brew "fd"                   # 智能查找，替代find
+brew "bat"                  # 语法高亮，替代cat
+brew "eza"                  # 现代列表，替代ls
+brew "bottom"               # 系统监控，替代top
+brew "dust"                 # 磁盘分析，替代du
+brew "procs"                # 进程查看，替代ps
+brew "tig"                  # Git TUI界面
+brew "jq"                   # JSON处理
+brew "yq"                   # YAML处理
+brew "zsh-completions"      # 额外的zsh补全
+brew "zsh-autosuggestions"  # zsh自动建议
+brew "zsh-syntax-highlighting" # zsh语法高亮
 
 # 开发工具
 brew "mise"
 brew "direnv"
 brew "chezmoi"
-brew "jq"
-brew "yq"
 brew "git"
 
 # 编辑器

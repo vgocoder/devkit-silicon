@@ -1,7 +1,74 @@
-# 核心配置
+# 初始化现代工具
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 eval "$(mise activate zsh)"
+
+# ============================================================================
+# 自动补全配置
+# ============================================================================
+
+# 加载专业的补全配置
+if [[ -f ~/.config/zsh/completions.zsh ]]; then
+    source ~/.config/zsh/completions.zsh
+else
+    # 基础补全配置（fallback）
+    autoload -Uz compinit
+    compinit
+    
+    # 基本补全样式
+    zstyle ':completion:*' menu select
+    zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+    zstyle ':completion:*' list-colors '${(s.:.)LS_COLORS}'
+    
+    # 基本选项
+    setopt AUTO_MENU
+    setopt COMPLETE_IN_WORD
+    setopt ALWAYS_TO_END
+fi
+
+# 历史命令智能搜索
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search  # 上箭头
+bindkey "^[[B" down-line-or-beginning-search  # 下箭头
+
+# ============================================================================
+# Zsh 增强插件
+# ============================================================================
+
+# 启用 zsh-autosuggestions（自动建议）
+if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    # 自动建议配置
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+    ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+    ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+    # 快捷键：Ctrl+Space 接受建议
+    bindkey '^ ' autosuggest-accept
+fi
+
+# 启用 zsh-syntax-highlighting（语法高亮）
+if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    # 语法高亮配置
+    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+    ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
+    ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
+    ZSH_HIGHLIGHT_STYLES[builtin]='fg=yellow,bold'
+    ZSH_HIGHLIGHT_STYLES[function]='fg=blue,bold'
+    ZSH_HIGHLIGHT_STYLES[command-substitution]='fg=magenta'
+    ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
+    ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
+fi
+
+# 启用额外的 zsh-completions
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+    autoload -Uz compinit
+    compinit
+fi
 
 # 现代CLI工具别名（渐进增强）
 command -v rg >/dev/null && alias grep='rg' || alias grep='grep --color=auto'

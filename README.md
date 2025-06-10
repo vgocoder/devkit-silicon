@@ -9,6 +9,24 @@
 
 [中文文档](README_CN.md) | [English](README.md)
 
+## ✨ Features
+
+- **🚀 One-Click Setup**: Complete development environment with a single command
+- **🛠️ Modern Tools**: Latest CLI tools and utilities for Apple Silicon
+- **⚙️ Smart Configuration**: Optimized dotfiles for productivity
+- **🔧 Development Ready**: Pre-configured for multiple programming languages
+- **📦 Package Management**: Automated dependency installation
+- **🎨 Beautiful Terminal**: Enhanced shell experience with themes and plugins
+- **⌨️ Smart Completion**: Advanced auto-completion for commands, files, and modern tools
+
+### ⌨️ Smart Completion System
+- **Advanced Completion Engine**: Powerful Zsh-based completion system
+- **Modern Tool Integration**: Native completion for kubectl, Docker, Helm, GitHub CLI, Terraform, and more
+- **Intelligent Matching**: Supports fuzzy matching, case-insensitive, and partial matching
+- **Context Awareness**: Provides relevant completion options based on command context
+- **Performance Optimized**: Completion caching and lazy loading for fast response
+- **Custom Completions**: Completion support for common aliases and custom commands
+
 ## Quick Start
 
 ### One-Click Installation (Recommended)
