@@ -194,6 +194,10 @@ fi
 # ============================================================================
 
 # 为常用别名创建补全映射
+# 确保 compinit 已加载
+autoload -Uz compinit
+compinit
+
 if alias g >/dev/null 2>&1; then
     compdef g=git
 fi
