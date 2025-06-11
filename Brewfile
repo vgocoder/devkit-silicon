@@ -27,6 +27,21 @@ brew "direnv"
 brew "chezmoi"
 brew "git"
 
+# 构建工具和开发依赖
+brew "autoconf"             # 自动配置工具
+brew "automake"             # 自动化构建工具
+brew "libtool"              # 库工具
+brew "make"                 # 构建工具
+brew "cmake"                # 跨平台构建系统
+brew "ninja"                # 快速构建系统
+brew "pkg-config"           # 包配置工具
+brew "gettext"              # 国际化工具
+brew "openssl@3"            # SSL/TLS库
+brew "curl"                 # 网络传输工具
+brew "wget"                 # 文件下载工具
+brew "tree"                 # 目录树显示
+brew "htop"                 # 进程监控
+
 # 编辑器
 cask "trae"
 cask "zed"
