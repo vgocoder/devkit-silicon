@@ -26,6 +26,18 @@ autoload -Uz bashcompinit && bashcompinit
 # 加载必要的模块
 zmodload zsh/complist
 
+# ============================================================================
+# 修复潜在的函数引用问题
+# ============================================================================
+
+# 定义 _smart_cd 函数作为 fallback，防止 "command not found" 错误
+if ! type _smart_cd >/dev/null 2>&1; then
+    function _smart_cd() {
+        # 简单的 cd 包装函数
+        builtin cd "$@"
+    }
+fi
+
 # 确保 menuselect keymap 可用
 if [[ -z "$terminfo[smkx]" ]] || [[ -z "$terminfo[rmkx]" ]]; then
     function zle-line-init() {
