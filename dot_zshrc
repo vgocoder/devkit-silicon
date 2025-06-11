@@ -24,6 +24,18 @@ eval "$(direnv hook zsh)"
 eval "$(mise activate zsh)"
 
 # ============================================================================
+# 别名定义（必须在补全配置之前）
+# ============================================================================
+
+# 容器和K8s别名
+alias d='docker'
+alias dc='docker-compose'
+alias k='kubectl'
+
+# Git 别名
+alias g='git'
+
+# ============================================================================
 # 自动补全配置
 # ============================================================================
 
@@ -108,11 +120,8 @@ function code() {
     fi
 }
 
-# 容器和K8s别名
-alias d='docker'
-alias dc='docker-compose'
+# 容器和K8s别名（基础别名已在上面定义）
 alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
-alias k='kubectl'
 alias kgp='kubectl get pods'
 alias kgs='kubectl get svc'
 alias kgd='kubectl get deployment'
