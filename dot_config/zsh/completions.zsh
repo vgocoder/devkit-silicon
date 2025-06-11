@@ -155,6 +155,9 @@ if command -v docker-compose >/dev/null 2>&1; then
                     ;;
             esac
         }
+        # 确保 compinit 已加载
+        autoload -Uz compinit
+        compinit
         compdef _docker-compose docker-compose
     fi
 fi
