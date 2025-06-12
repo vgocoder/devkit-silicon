@@ -39,6 +39,11 @@ alias g='git'
 # 自动补全配置
 # ============================================================================
 
+# 加载补全配置文件（如果存在）
+if [[ -f ~/.config/zsh/completions.conf ]]; then
+    source ~/.config/zsh/completions.conf
+fi
+
 # 加载专业的补全配置
 if [[ -f ~/.config/zsh/completions.zsh ]]; then
     source ~/.config/zsh/completions.zsh
